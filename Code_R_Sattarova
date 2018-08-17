@@ -16,3 +16,19 @@ Subject = read.csv(file="subject.csv", sep=",", dec=".", header=TRUE)  #load dat
 Data = merge(merge(Efficacy, Randomization, by="subject", sort = TRUE), Subject, by="subject", sort = TRUE)
 
 rm(Efficacy, Randomization, Subject)
+
+#Rescaling of the Depenedent Variable
+Data$nosebleeds.round=round(Data$nosebleeds/(Data$duration/365))
+
+#Descriptive Statistics
+summary(Data, maxsum=10)
+hist(Data$nosebleeds)
+
+
+#Dummmy Variables Creation for "Country"
+Data = dummy_cols(Data, select_columns = "country")
+Names = names(Data)
+
+#Releveling of the baseline categories for categorical variables of interest 
+Data$arm = relevel(Data$arm, ref="PLACEBO")
+Data$tissue.use = relevel(Data$tissue.use, ref="MEDIUM")
