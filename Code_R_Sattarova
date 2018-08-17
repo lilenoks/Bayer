@@ -4,3 +4,15 @@ cat("\014")
 
 if(!require("fastDummies")) {install.packages("fastDummies");  require("fastDummies")  } 
 if(!require("MASS")) {install.packages("MASS");  require("MASS")  } 
+
+#Data Reorganization
+
+#Data Load
+Efficacy = read.csv(file="efficacy.csv", sep=",", dec=".", header=TRUE)  #load data from file
+Randomization = read.csv(file="randomization.csv", sep=",", dec=".", header=TRUE)  #load data from file
+Subject = read.csv(file="subject.csv", sep=",", dec=".", header=TRUE)  #load data from file
+
+#Data Merge bu Subject
+Data = merge(merge(Efficacy, Randomization, by="subject", sort = TRUE), Subject, by="subject", sort = TRUE)
+
+rm(Efficacy, Randomization, Subject)
