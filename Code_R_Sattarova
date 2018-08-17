@@ -1,0 +1,6 @@
+setwd("~/Documents/My/Bayer") 
+rm(list=ls())
+cat("\014")
+
+if(!require("fastDummies")) {install.packages("fastDummies");  require("fastDummies")  } 
+if(!require("MASS")) {install.packages("MASS");  require("MASS")  } 
